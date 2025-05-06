@@ -69,7 +69,11 @@ const Detection = () => {
 
       <div className="flex-1 w-full mb-4">
         <div
-          className={`h-96 w-full relative p-4 border-2 ${dragOver ? 'border-blue-500 bg-blue-50' : 'border-dashed border-gray-300'} rounded-lg text-center cursor-pointer hover:border-blue-400 transition-all duration-300`}
+          className={`h-96 w-full relative p-4 border-2 ${
+            dragOver
+              ? "border-blue-500 bg-blue-50"
+              : "border-dashed border-gray-300"
+          } rounded-lg text-center cursor-pointer hover:border-blue-400 transition-all duration-300`}
           onDrop={(e) => {
             e.preventDefault();
             setDragOver(false);
@@ -86,7 +90,7 @@ const Detection = () => {
             setDragOver(true);
           }}
           onDragLeave={() => setDragOver(false)}
-          onClick={() => document.getElementById('fileInput')?.click()}
+          onClick={() => document.getElementById("fileInput")?.click()}
         >
           <input
             type="file"
@@ -100,7 +104,9 @@ const Detection = () => {
               <p className="text-gray-600 font-medium">
                 Drag and drop an image here or click to upload
               </p>
-              <p className="text-xs text-gray-500 mt-2">Supported formats: PNG, JPG, JPEG</p>
+              <p className="text-xs text-gray-500 mt-2">
+                Supported formats: PNG, JPG, JPEG
+              </p>
             </div>
           ) : (
             <div className="relative h-full">
@@ -130,14 +136,18 @@ const Detection = () => {
         <button
           onClick={handleSubmit}
           disabled={!file || loading}
-          className={`px-4 py-2 rounded-md font-medium ${!file || loading ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'} transition`}
+          className={`px-4 py-2 rounded-md font-medium ${
+            !file || loading
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600 text-white"
+          } transition`}
         >
-          {loading ? 'Processing...' : 'Detect Deepfake'}
+          {loading ? "Processing..." : "Detect Deepfake"}
         </button>
 
         <button
           onClick={handleReset}
-          className="px-4 py-2 bg-gray-200 rounded-md font-medium hover:bg-gray-300 transition"
+          className="px-4 py-2 bg-gray-600 rounded-md font-medium hover:bg-gray-300 transition"
         >
           Reset
         </button>
@@ -151,24 +161,31 @@ const Detection = () => {
       )}
 
       {/* Result Display */}
+      {/* Result Display */}
       {result && (
         <div className="p-4 bg-gray-50 border border-gray-200 rounded-md">
-          <h2 className="text-xl font-semibold mb-2">Result</h2>
-          <div className="flex flex-col gap-2">
+          <h2 className="text-xl font-semibold mb-2 text-black">Result</h2>
+          <div className="flex flex-col gap-2 text-black">
+            {" "}
+            {/* Added text-black here */}
             <div className="flex items-center">
               <span className="font-medium mr-2">Classification:</span>
-              <span className={`px-3 py-1 rounded-full ${result.result === 'Real' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+              <span
+                className={`px-3 py-1 rounded-full ${
+                  result.result === "Real"
+                    ? "bg-green-100 text-black"
+                    : "bg-red-100 text-black"
+                }`}
+              >
                 {result.result}
               </span>
             </div>
-
             {result.confidence !== undefined && (
               <div>
                 <span className="font-medium mr-2">Confidence:</span>
                 <span>{result.confidence}%</span>
               </div>
             )}
-
             {result.processing_time_ms !== undefined && (
               <div>
                 <span className="font-medium mr-2">Processing Time:</span>
@@ -179,7 +196,7 @@ const Detection = () => {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default Detection
